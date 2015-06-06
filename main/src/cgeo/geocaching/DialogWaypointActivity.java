@@ -27,7 +27,7 @@ public class DialogWaypointActivity extends DialogFragment {
 
         // Setting Negative "Discard" Button
         alertDialog.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int which) {
+       		public void onClick(DialogInterface dialog, int which) {
         	// User pressed Discard button. Write Logic Here
         	EditWaypointActivityEditWaypointActivity.finish();
                 Toast.makeText(getApplicationContext(), "Your changes have not been saved", Toast.LENGTH_SHORT).show();
