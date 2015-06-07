@@ -227,7 +227,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 finish();
                 return true;
             case android.R.id.home:
-                createDialogBox();
+                saveWaypoint();
+                finish();
                 break;
         }
 
@@ -236,14 +237,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void onBackPressed() {
-        createDialogBox();
-        super.onBackPressed();
-    }
-
-    public void createDialogBox() {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         alertDialogBuilder.setTitle("Save Waypoint");
+
         alertDialogBuilder
                 .setMessage("Do you want to keep the changes?")
                 .setCancelable(false)
@@ -257,6 +254,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 .setNegativeButton("Discard", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
                         finish();
                     }
                 });
@@ -264,6 +262,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
