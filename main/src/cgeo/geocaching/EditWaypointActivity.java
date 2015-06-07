@@ -27,8 +27,10 @@ import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -225,7 +227,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 finish();
                 return true;
             case android.R.id.home:
-                saveWaypoint();
+                createDialogBox();
                 break;
         }
 
@@ -234,8 +236,33 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void onBackPressed() {
-        saveWaypoint();
+        createDialogBox();
         super.onBackPressed();
+    }
+
+    public void createDialogBox() {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        alertDialogBuilder.setTitle("Save Waypoint");
+        alertDialogBuilder
+                .setMessage("Do you want to keep the changes?")
+                .setCancelable(false)
+                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        saveWaypoint();
+                        finish();
+                    }
+                })
+                .setNegativeButton("Discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        finish();
+                    }
+                });
+
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
