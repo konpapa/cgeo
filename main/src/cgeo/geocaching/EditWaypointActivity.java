@@ -228,7 +228,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 return true;
             case android.R.id.home:
                 saveWaypoint();
-                finish();
                 break;
         }
 
@@ -237,6 +236,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void onBackPressed() {
+        showDialogBox();
+    }
+
+    public void showDialogBox() {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         alertDialogBuilder.setTitle("Save Waypoint");
